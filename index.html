@@ -11,32 +11,33 @@
 /* Plan : une notice d'architecte pour des voisins, aux couleurs de la résidence.
    Encre brune sur papier beige, accent bronze, une coupe de balcon comme pièce maîtresse.
    Colonne de lecture ~68ch, figures qui débordent en deux colonnes sur grand écran. */
-/* Palette tirée de la résidence, en style épuré : dominante blanche, sections alternées beige très clair,
-   accent bronze des menuiseries, brun des volets pour le texte et le bandeau final. */
+/* Style épuré : blanc et gris neutres, texte quasi noir, une seule couleur d'accent,
+   le bronze des menuiseries de la résidence, réservé aux titres, chiffres et boutons. */
 :root{
   --paper:#ffffff;
   --sheet:#ffffff;
-  --tint:#f8f4ec;
-  --ink:#2f261e;
-  --muted:#6f6250;
-  --line:#ece4d6;
-  --accent:#8a6532;
-  --accent-soft:#f3e8d3;
-  --warm:#9a5634;
-  --shadow:0 1px 2px rgba(47,38,30,.05), 0 10px 30px rgba(47,38,30,.07);
+  --tint:#f6f6f4;
+  --ink:#1d1d1f;
+  --muted:#5e6066;
+  --line:#e6e6e3;
+  --accent:#9a7340;
+  --accent-soft:#f4ece0;
+  --warm:#b0603a;
+  --band:#1d1d1f;
+  --shadow:0 1px 2px rgba(20,20,20,.04), 0 10px 30px rgba(20,20,20,.06);
   --display:"Archivo", "Arial Narrow", Arial, sans-serif;
   --body:"Public Sans", "Segoe UI", Helvetica, Arial, sans-serif;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --paper:#17130f; --sheet:#221c16; --tint:#1d1813; --ink:#efe6d6; --muted:#b6a68e; --line:#3a3027;
-    --accent:#d2aa6c; --accent-soft:#3a2f22; --warm:#d98a62; --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25); color-scheme: dark;
+    --paper:#111214; --sheet:#1a1b1e; --tint:#151619; --ink:#f2f2f0; --muted:#a4a7ae; --line:#2c2e33;
+    --accent:#d6af72; --accent-soft:#2f2a22; --warm:#e08a62; --band:#26282c; --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.3); color-scheme: dark;
   }
 }
 :root[data-theme="dark"]{
-  --paper:#17130f; --sheet:#221c16; --tint:#1d1813; --ink:#efe6d6; --muted:#b6a68e; --line:#3a3027;
-  --accent:#d2aa6c; --accent-soft:#3a2f22; --warm:#d98a62; --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25); color-scheme: dark;
+  --paper:#111214; --sheet:#1a1b1e; --tint:#151619; --ink:#f2f2f0; --muted:#a4a7ae; --line:#2c2e33;
+  --accent:#d6af72; --accent-soft:#2f2a22; --warm:#e08a62; --band:#26282c; --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.3); color-scheme: dark;
 }
 
 *{box-sizing:border-box}
@@ -68,7 +69,7 @@ header.top .wrap{display:flex;justify-content:space-between;align-items:center;g
 .actions{display:flex;gap:12px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:.95rem;text-decoration:none;border:1.5px solid var(--accent);transition:background .15s,color .15s}
 .btn.primary{background:var(--accent);color:var(--sheet)}
-.btn.primary:hover{background:var(--ink);border-color:var(--ink)}
+.btn.primary:hover{filter:brightness(.9)}
 .btn.ghost{color:var(--accent);background:transparent}
 .btn.ghost:hover{background:var(--accent-soft)}
 .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
@@ -117,7 +118,7 @@ main > section:nth-child(even){background:var(--tint)}
 
 /* Échelle de bruit */
 .scale{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:32px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:18px}
-.bar{position:relative;height:14px;border-radius:7px;background:linear-gradient(90deg,var(--accent-soft),var(--line) 55%,var(--warm))}
+.bar{position:relative;height:14px;border-radius:7px;background:linear-gradient(90deg,#dfe9e6,var(--line) 50%,var(--warm))}
 .ticks{position:relative;height:150px}
 .tick{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;width:132px;text-align:center}
 .tick .db{font-family:var(--display);font-stretch:80%;font-weight:700;font-size:1.05rem;font-variant-numeric:tabular-nums}
@@ -170,7 +171,7 @@ th{font-family:var(--display);font-stretch:90%;font-weight:700;font-size:.85rem;
 @media (max-width:760px){.faq{grid-template-columns:1fr}}
 
 /* Vote AG */
-.cta{background:var(--ink);color:var(--paper);border-radius:18px;padding:44px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:start}
+.cta{background:var(--band);color:var(--paper);border-radius:18px;padding:44px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:start}
 .cta h2{color:#fffdf8}
 .cta h3{color:#fffdf8 !important}
 .cta p{color:#fffdf8;opacity:.85}
