@@ -69,7 +69,9 @@ header.top .wrap{display:flex;justify-content:space-between;align-items:center;g
 @media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
 
 figure{margin:0}
-.plan{background:var(--sheet);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.photo{display:flex;flex-direction:column;gap:10px}
+.photo img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:16px;box-shadow:var(--shadow)}
+.photo figcaption{font-size:.85rem;color:var(--muted)}
 .plan svg{display:block;width:100%;height:auto}
 .plan figcaption{font-size:.8rem;color:var(--muted);padding:8px 4px 0}
 
@@ -193,72 +195,9 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
         <a class="btn ghost" href="#vote">Comment voter</a>
       </div>
     </div>
-    <figure class="plan">
-      <svg viewBox="0 0 560 360" role="img" aria-labelledby="planTitle planDesc">
-        <title id="planTitle">Coupe d'un balcon avec une installation conforme</title>
-        <desc id="planDesc">Le groupe extérieur est posé au sol du balcon sur des plots antivibratiles, dans un caisson aspect bois qui ne dépasse pas la hauteur du garde-corps, soit 105 cm. Les liaisons passent par un percement carotté dans le mur, puis dans une goulotte. Les condensats sont évacués vers un point privatif.</desc>
-        <defs>
-          <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-            <line x1="0" y1="0" x2="0" y2="7" style="stroke:var(--muted);stroke-width:1"/>
-          </pattern>
-        </defs>
-        <!-- Logement -->
-        <text class="t-small" x="18" y="40">LOGEMENT</text>
-        <!-- Mur de façade -->
-        <rect class="f-wall" x="78" y="20" width="34" height="290"/>
-        <!-- Percement carotté -->
-        <rect x="76" y="203" width="38" height="12" style="fill:var(--sheet);stroke:var(--accent);stroke-width:2"/>
-        <!-- Dalle du balcon -->
-        <rect class="f-slab" x="78" y="300" width="402" height="20"/>
-        <!-- Garde-corps -->
-        <line class="s-ink" x1="470" y1="300" x2="470" y2="132"/>
-        <line class="s-ink" x1="462" y1="132" x2="478" y2="132" style="stroke-width:3"/>
-        <line class="s-thin" x1="470" y1="170" x2="470" y2="300" style="stroke-dasharray:2 4"/>
-        <!-- Cote 105 cm -->
-        <line class="s-acc" x1="505" y1="132" x2="505" y2="300"/>
-        <line class="s-acc" x1="498" y1="132" x2="512" y2="132"/>
-        <line class="s-acc" x1="498" y1="300" x2="512" y2="300"/>
-        <text class="t-dim" x="514" y="221">105</text>
-        <text class="t-small" x="514" y="235">cm</text>
-        <!-- Ligne d'alignement haut du garde-corps -->
-        <line class="s-thin" x1="250" y1="132" x2="462" y2="132" style="stroke-dasharray:4 4"/>
-        <!-- Caisson -->
-        <rect class="f-box" x="250" y="162" width="160" height="138" rx="2"/>
-        <g style="stroke:var(--accent);stroke-width:1.2">
-          <line x1="256" y1="176" x2="404" y2="176"/><line x1="256" y1="190" x2="404" y2="190"/>
-          <line x1="256" y1="276" x2="404" y2="276"/><line x1="256" y1="288" x2="404" y2="288"/>
-        </g>
-        <!-- Groupe extérieur -->
-        <rect class="f-unit" x="270" y="196" width="122" height="88" rx="3"/>
-        <circle class="s-ink" cx="330" cy="240" r="30"/>
-        <g class="fan" style="transform-origin:330px 240px">
-          <path d="M330 240 L330 214 Q342 226 330 240 Z M330 240 L356 240 Q344 252 330 240 Z M330 240 L330 266 Q318 254 330 240 Z M330 240 L304 240 Q316 228 330 240 Z" style="fill:var(--muted)"/>
-        </g>
-        <!-- Plots -->
-        <rect x="280" y="284" width="16" height="8" style="fill:var(--ink)"/>
-        <rect x="366" y="284" width="16" height="8" style="fill:var(--ink)"/>
-        <!-- Liaisons en goulotte -->
-        <path class="s-acc" d="M114 209 L200 209 Q210 209 210 219 L210 250 Q210 258 218 258 L270 258"/>
-        <rect x="114" y="204" width="90" height="10" style="fill:none;stroke:var(--muted);stroke-width:1"/>
-        <!-- Condensats -->
-        <path class="s-thin" d="M392 278 L430 278 L430 298" style="stroke:var(--accent);stroke-dasharray:3 3;stroke-width:1.5"/>
-        <!-- Étiquettes -->
-        <line class="s-thin" x1="95" y1="200" x2="128" y2="150"/>
-        <text class="t-lab" x="132" y="146">Percement carotté</text>
-        <text class="t-small" x="132" y="160">avec fourreau étanche</text>
-        <line class="s-thin" x1="160" y1="214" x2="160" y2="80"/>
-        <text class="t-lab" x="164" y="76">Liaisons en goulotte</text>
-        <text class="t-small" x="164" y="90">teinte de la façade</text>
-        <line class="s-thin" x1="330" y1="162" x2="330" y2="40"/>
-        <text class="t-lab" x="334" y="36">Caisson aspect bois</text>
-        <text class="t-small" x="334" y="50">ventilé, démontable</text>
-        <text class="t-small" x="334" y="62">sous le garde-corps</text>
-        <text class="t-small" x="226" y="346">Plots antivibratiles, posé au sol</text>
-        <line class="s-thin" x1="288" y1="294" x2="280" y2="334"/>
-        <text class="t-small" x="420" y="346">Condensats évacués</text>
-        <line class="s-thin" x1="430" y1="300" x2="450" y2="334"/>
-      </svg>
-      <figcaption>Coupe de principe d'un balcon, à l'échelle approximative. Aucun groupe n'est fixé sur la façade.</figcaption>
+    <figure class="photo">
+      <img src="balcon.jpg" width="1000" height="1333" alt="Balcon de la résidence avec un caisson en bois ajouré posé au sol, au fond, sous la hauteur du garde-corps.">
+      <figcaption>Un balcon de la résidence : le caisson en bois ajouré, posé au sol au fond du balcon, montre le type d'intégration proposé.</figcaption>
     </figure>
   </div>
 </div>
