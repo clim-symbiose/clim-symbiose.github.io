@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Climatisation à Symbiose</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* Plan : une notice d'architecte pour des voisins, aux couleurs de la résidence.
+   Encre brune sur papier beige, accent bronze, une coupe de balcon comme pièce maîtresse.
+   Colonne de lecture ~68ch, figures qui débordent en deux colonnes sur grand écran. */
+/* Palette tirée de la résidence : brique beige, cadres blancs, menuiseries et garde-corps bronze,
+   volets et nez de dalle brun. */
+:root{
+  --paper:#f5f1e8;
+  --sheet:#fffdf8;
+  --ink:#3b2f25;
+  --muted:#76674f;
+  --line:#e0d5bf;
+  --accent:#8a6532;
+  --accent-soft:#efe3cb;
+  --warm:#9a5634;
+  --display:"Archivo", "Arial Narrow", Arial, sans-serif;
+  --body:"Public Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1c1713; --sheet:#251f19; --ink:#efe6d6; --muted:#b6a68e; --line:#3c3228;
+    --accent:#d2aa6c; --accent-soft:#3a2f22; --warm:#d98a62; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1c1713; --sheet:#251f19; --ink:#efe6d6; --muted:#b6a68e; --line:#3c3228;
+  --accent:#d2aa6c; --accent-soft:#3a2f22; --warm:#d98a62; color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+a{color:var(--accent)}
+a:focus-visible, button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+@media (max-width:420px){.wrap{padding:0 16px}}
+
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.1;margin:0}
+h1{font-size:clamp(2.2rem,5.4vw,3.9rem);font-weight:800;font-stretch:72%;letter-spacing:-.01em}
+h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:750;font-stretch:78%}
+h3{font-size:1.15rem;font-weight:700;font-stretch:90%}
+p{margin:0}
+.lede{font-size:1.15rem;color:var(--muted);max-width:60ch}
+.eyebrow{font-family:var(--display);font-stretch:110%;font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+
+/* En-tête */
+header.top{border-bottom:1px solid var(--line);background:var(--sheet)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-stretch:110%;font-weight:700;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase}
+.tag{font-size:.85rem;color:var(--muted)}
+
+/* Hero */
+.hero{padding:48px 0 40px;background:var(--sheet);border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
+.hero .text{display:flex;flex-direction:column;gap:20px}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+
+figure{margin:0}
+.plan{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px}
+.plan svg{display:block;width:100%;height:auto}
+.plan figcaption{font-size:.8rem;color:var(--muted);padding:8px 4px 0}
+
+/* SVG plan */
+.s-ink{stroke:var(--ink);fill:none;stroke-width:1.6}
+.s-thin{stroke:var(--muted);fill:none;stroke-width:1}
+.s-acc{stroke:var(--accent);fill:none;stroke-width:2}
+.f-wall{fill:url(#hatch);stroke:var(--ink);stroke-width:1.4}
+.f-slab{fill:var(--line);stroke:var(--ink);stroke-width:1.4}
+.f-unit{fill:var(--sheet);stroke:var(--ink);stroke-width:1.6}
+.f-box{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
+.t-lab{font-family:var(--body);font-size:12px;fill:var(--ink)}
+.t-small{font-family:var(--body);font-size:10.5px;fill:var(--muted)}
+.t-dim{font-family:var(--display);font-stretch:85%;font-weight:700;font-size:13px;fill:var(--accent)}
+.fan{transform-origin:330px 232px;animation:spin 3.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.fan{animation:none}}
+
+/* Sections */
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+.head{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;max-width:68ch}
+
+/* En bref */
+.brief{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:6px;background:var(--sheet)}
+.brief > div{padding:20px;display:flex;flex-direction:column;gap:8px;border-right:1px solid var(--line)}
+.brief > div:last-child{border-right:0}
+.brief .k{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:2rem;line-height:1;color:var(--accent)}
+.brief p{font-size:.95rem;color:var(--muted)}
+@media (max-width:860px){.brief{grid-template-columns:1fr 1fr}.brief > div:nth-child(2){border-right:0}.brief > div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media (max-width:480px){.brief{grid-template-columns:1fr}.brief > div{border-right:0;border-bottom:1px solid var(--line)}.brief > div:last-child{border-bottom:0}}
+
+/* Règles */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rule{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.rule ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:.95rem}
+@media (max-width:860px){.rules{grid-template-columns:1fr}}
+
+/* Échelle de bruit */
+.scale{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:18px}
+.bar{position:relative;height:14px;border-radius:7px;background:linear-gradient(90deg,var(--accent-soft),var(--line) 55%,var(--warm))}
+.ticks{position:relative;height:150px}
+.tick{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;width:132px;text-align:center}
+.tick .db{font-family:var(--display);font-stretch:80%;font-weight:700;font-size:1.05rem;font-variant-numeric:tabular-nums}
+.tick .what{font-size:.82rem;color:var(--muted);line-height:1.35}
+.tick .pin{width:2px;height:14px;background:var(--muted)}
+.tick.limit .db{color:var(--accent);font-size:1.4rem}
+.tick.limit .pin{background:var(--accent);width:3px;height:20px}
+.tick.limit .what{color:var(--ink);font-weight:600}
+.scale .note{font-size:.9rem;color:var(--muted);max-width:70ch}
+@media (max-width:700px){
+  .ticks{height:auto;display:flex;flex-direction:column;gap:10px}
+  .tick{position:static;transform:none;width:auto;flex-direction:row;align-items:baseline;text-align:left;gap:12px}
+  .tick .pin{display:none}
+  .tick .db{min-width:4.5ch}
+}
+
+/* Deux votes */
+.votes{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+.vote{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:22px;display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--accent)}
+.vote .n{font-family:var(--display);font-stretch:110%;font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.vote .maj{font-size:.85rem;color:var(--muted)}
+@media (max-width:760px){.votes{grid-template-columns:1fr}}
+.tablebox{overflow-x:auto;background:var(--sheet);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.95rem}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--display);font-stretch:90%;font-weight:700;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.chip{display:inline-block;font-size:.78rem;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.yes{background:var(--accent-soft);color:var(--accent)}
+.no{background:var(--line);color:var(--muted)}
+
+/* Parcours */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0;counter-reset:s;border-top:2px solid var(--ink)}
+.steps li{counter-increment:s;padding:18px 20px 18px 0;display:flex;flex-direction:column;gap:6px;border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--display);font-stretch:70%;font-weight:800;font-size:1.6rem;color:var(--accent);line-height:1}
+.steps p{font-size:.95rem;color:var(--muted)}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* Garanties */
+.guar{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;max-width:900px}
+.guar div{display:flex;flex-direction:column;gap:4px;padding-left:14px;border-left:3px solid var(--accent)}
+.guar p{font-size:.95rem;color:var(--muted)}
+@media (max-width:700px){.guar{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}
+.faq div{display:flex;flex-direction:column;gap:6px}
+.faq p{color:var(--muted);font-size:.97rem}
+@media (max-width:760px){.faq{grid-template-columns:1fr}}
+
+/* Vote AG */
+.cta{background:var(--ink);color:var(--paper);border-radius:8px;padding:32px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:start}
+.cta h2{color:var(--paper)}
+.cta p{color:var(--paper);opacity:.85}
+.cta ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+@media (max-width:760px){.cta{grid-template-columns:1fr;padding:24px}}
+
+footer{padding:32px 0 48px;font-size:.88rem;color:var(--muted)}
+footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand">Résidence Symbiose</span>
+    <span class="tag">Écoquartier de l'Arsenal · Proposition pour la prochaine AG</span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="text">
+      <span class="eyebrow">Proposition de résolution</span>
+      <h1>Pouvoir installer une climatisation, avec des règles communes</h1>
+      <p class="lede">Les étés deviennent difficiles dans certains logements. Nous proposons à l'assemblée générale un cadre clair : ceux qui le souhaitent pourront installer une climatisation à leurs frais, sans groupe en façade, sans nuisance et sans risque pour l'immeuble.</p>
+    </div>
+    <figure class="plan">
+      <svg viewBox="0 0 560 360" role="img" aria-labelledby="planTitle planDesc">
+        <title id="planTitle">Coupe d'un balcon avec une installation conforme</title>
+        <desc id="planDesc">Le groupe extérieur est posé au sol du balcon sur des plots antivibratiles, dans un caisson aspect bois qui ne dépasse pas la hauteur du garde-corps, soit 105 cm. Les liaisons passent par un percement carotté dans le mur, puis dans une goulotte. Les condensats sont évacués vers un point privatif.</desc>
+        <defs>
+          <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="7" style="stroke:var(--muted);stroke-width:1"/>
+          </pattern>
+        </defs>
+        <!-- Logement -->
+        <text class="t-small" x="18" y="40">LOGEMENT</text>
+        <!-- Mur de façade -->
+        <rect class="f-wall" x="78" y="20" width="34" height="290"/>
+        <!-- Percement carotté -->
+        <rect x="76" y="203" width="38" height="12" style="fill:var(--sheet);stroke:var(--accent);stroke-width:2"/>
+        <!-- Dalle du balcon -->
+        <rect class="f-slab" x="78" y="300" width="402" height="20"/>
+        <!-- Garde-corps -->
+        <line class="s-ink" x1="470" y1="300" x2="470" y2="132"/>
+        <line class="s-ink" x1="462" y1="132" x2="478" y2="132" style="stroke-width:3"/>
+        <line class="s-thin" x1="470" y1="170" x2="470" y2="300" style="stroke-dasharray:2 4"/>
+        <!-- Cote 105 cm -->
+        <line class="s-acc" x1="505" y1="132" x2="505" y2="300"/>
+        <line class="s-acc" x1="498" y1="132" x2="512" y2="132"/>
+        <line class="s-acc" x1="498" y1="300" x2="512" y2="300"/>
+        <text class="t-dim" x="514" y="221">105</text>
+        <text class="t-small" x="514" y="235">cm</text>
+        <!-- Ligne d'alignement haut du garde-corps -->
+        <line class="s-thin" x1="250" y1="132" x2="462" y2="132" style="stroke-dasharray:4 4"/>
+        <!-- Caisson -->
+        <rect class="f-box" x="250" y="162" width="160" height="138" rx="2"/>
+        <g style="stroke:var(--accent);stroke-width:1.2">
+          <line x1="256" y1="176" x2="404" y2="176"/><line x1="256" y1="190" x2="404" y2="190"/>
+          <line x1="256" y1="276" x2="404" y2="276"/><line x1="256" y1="288" x2="404" y2="288"/>
+        </g>
+        <!-- Groupe extérieur -->
+        <rect class="f-unit" x="270" y="196" width="122" height="88" rx="3"/>
+        <circle class="s-ink" cx="330" cy="240" r="30"/>
+        <g class="fan" style="transform-origin:330px 240px">
+          <path d="M330 240 L330 214 Q342 226 330 240 Z M330 240 L356 240 Q344 252 330 240 Z M330 240 L330 266 Q318 254 330 240 Z M330 240 L304 240 Q316 228 330 240 Z" style="fill:var(--muted)"/>
+        </g>
+        <!-- Plots -->
+        <rect x="280" y="284" width="16" height="8" style="fill:var(--ink)"/>
+        <rect x="366" y="284" width="16" height="8" style="fill:var(--ink)"/>
+        <!-- Liaisons en goulotte -->
+        <path class="s-acc" d="M114 209 L200 209 Q210 209 210 219 L210 250 Q210 258 218 258 L270 258"/>
+        <rect x="114" y="204" width="90" height="10" style="fill:none;stroke:var(--muted);stroke-width:1"/>
+        <!-- Condensats -->
+        <path class="s-thin" d="M392 278 L430 278 L430 298" style="stroke:var(--accent);stroke-dasharray:3 3;stroke-width:1.5"/>
+        <!-- Étiquettes -->
+        <line class="s-thin" x1="95" y1="200" x2="128" y2="150"/>
+        <text class="t-lab" x="132" y="146">Percement carotté</text>
+        <text class="t-small" x="132" y="160">avec fourreau étanche</text>
+        <line class="s-thin" x1="160" y1="214" x2="160" y2="80"/>
+        <text class="t-lab" x="164" y="76">Liaisons en goulotte</text>
+        <text class="t-small" x="164" y="90">teinte de la façade</text>
+        <line class="s-thin" x1="330" y1="162" x2="330" y2="40"/>
+        <text class="t-lab" x="334" y="36">Caisson aspect bois</text>
+        <text class="t-small" x="334" y="50">ventilé, démontable</text>
+        <text class="t-small" x="334" y="62">sous le garde-corps</text>
+        <text class="t-small" x="226" y="346">Plots antivibratiles, posé au sol</text>
+        <line class="s-thin" x1="288" y1="294" x2="280" y2="334"/>
+        <text class="t-small" x="420" y="346">Condensats évacués</text>
+        <line class="s-thin" x1="430" y1="300" x2="450" y2="334"/>
+      </svg>
+      <figcaption>Coupe de principe d'un balcon, à l'échelle approximative. Aucun groupe n'est fixé sur la façade.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">En bref</span>
+        <h2>Ce que la proposition change, et ce qu'elle ne change pas</h2>
+      </div>
+      <div class="brief">
+        <div><span class="k">0 €</span><h3>pour la copropriété</h3><p>Installation, entretien, dépose et assurance sont entièrement à la charge de celui qui installe.</p></div>
+        <div><span class="k">Libre</span><h3>pour chacun</h3><p>Personne n'est obligé d'installer une climatisation. Chaque propriétaire décide pour son logement.</p></div>
+        <div><span class="k">0</span><h3>groupe en façade</h3><p>Uniquement au sol d'un balcon, d'une loggia, d'une terrasse ou d'un jardin privatif, dans un caisson.</p></div>
+        <div><span class="k">2 ans</span><h3>puis un bilan</h3><p>L'AG fait le point et peut durcir les règles pour les installations suivantes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Le cahier des charges</span>
+        <h2>Des règles précises, votées par l'assemblée</h2>
+        <p class="lede">Le cahier des charges est joint à la convocation et approuvé tel quel par l'AG. Seule une nouvelle décision de l'AG pourra le modifier.</p>
+      </div>
+      <div class="rules">
+        <div class="rule">
+          <h3>Aspect</h3>
+          <ul>
+            <li>Groupe posé au sol, jamais fixé en façade</li>
+            <li>Caisson en bois ou aspect bois, échantillon soumis au syndic</li>
+            <li>Hauteur limitée à celle du garde-corps (105 cm)</li>
+            <li>Liaisons en goulotte de la teinte de la façade</li>
+          </ul>
+        </div>
+        <div class="rule">
+          <h3>Bruit</h3>
+          <ul>
+            <li>Appareils inverter, parmi les plus silencieux de leur catégorie</li>
+            <li>50 dB(A) maximum mesurés à 1 m</li>
+            <li>Mode nuit obligatoire de 22 h à 7 h</li>
+            <li>Au moins 1 m d'une fenêtre voisine, sur plots antivibratiles</li>
+          </ul>
+        </div>
+        <div class="rule">
+          <h3>Bâtiment</h3>
+          <ul>
+            <li>Percement par carottage, hors éléments porteurs et zones interdites</li>
+            <li>Installateur avec RC pro et garantie décennale</li>
+            <li>Photos avant, pendant et après, remises au syndic</li>
+            <li>Condensats évacués sans couler sur la façade ni chez les voisins</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Le bruit</span>
+        <h2>50 dB(A) à un mètre de l'appareil, c'est combien ?</h2>
+        <p class="lede">Repères usuels, en ordre de grandeur. La limite proposée se mesure tout près du groupe, le bruit perçu chez un voisin est plus faible.</p>
+      </div>
+      <div class="scale">
+        <div class="bar" aria-hidden="true"></div>
+        <div class="ticks">
+          <div class="tick" style="left:16.7%"><span class="pin"></span><span class="db">30 dB</span><span class="what">Chambre calme la nuit</span></div>
+          <div class="tick" style="left:33.3%"><span class="pin"></span><span class="db">40 dB</span><span class="what">Bibliothèque</span></div>
+          <div class="tick limit" style="left:50%"><span class="pin"></span><span class="db">50 dB</span><span class="what">Limite proposée, à 1 m du groupe</span></div>
+          <div class="tick" style="left:66.7%"><span class="pin"></span><span class="db">60 dB</span><span class="what">Conversation normale</span></div>
+          <div class="tick" style="left:83.3%"><span class="pin"></span><span class="db">70 dB</span><span class="what">Aspirateur</span></div>
+        </div>
+        <p class="note">Le niveau sonore baisse d'environ 6 dB chaque fois que la distance double. Le caisson et le mode nuit réduisent encore la gêne. En cas de plainte, le syndic peut faire mesurer le bruit et le copropriétaire doit corriger la situation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">À l'AG</span>
+        <h2>Deux résolutions, deux questions simples</h2>
+        <p class="lede">Chacun peut se prononcer séparément sur la vérification et sur l'autorisation.</p>
+      </div>
+      <div class="votes">
+        <div class="vote">
+          <span class="n">Résolution 1</span>
+          <h3>Vérifier que c'est sans risque pour l'immeuble</h3>
+          <p>Le syndic obtient la confirmation écrite de l'assureur de l'immeuble que les percements ne remettent pas en cause ses garanties, et la liste des zones où l'on ne peut pas percer. Une étude complémentaire est possible, avec un budget plafonné.</p>
+          <span class="maj">Majorité simple des présents et représentés (article 24)</span>
+        </div>
+        <div class="vote">
+          <span class="n">Résolution 2</span>
+          <h3>Autoriser ceux qui le souhaitent, selon le cahier des charges</h3>
+          <p>Les copropriétaires qui le souhaitent peuvent installer une climatisation à leurs frais, dans le respect du cahier des charges. Aucune installation ne commence avant la confirmation de l'assureur.</p>
+          <span class="maj">Majorité de tous les copropriétaires (article 25), avec second vote à la majorité simple si au moins un tiers des voix est atteint</span>
+        </div>
+      </div>
+      <div class="tablebox">
+        <table>
+          <thead><tr><th>Résolution 1</th><th>Résolution 2</th><th>Résultat</th></tr></thead>
+          <tbody>
+            <tr><td><span class="chip yes">Adoptée</span></td><td><span class="chip yes">Adoptée</span></td><td>Les installations conformes sont possibles, une fois la confirmation de l'assureur reçue.</td></tr>
+            <tr><td><span class="chip yes">Adoptée</span></td><td><span class="chip no">Rejetée</span></td><td>Les vérifications sont faites. L'assemblée pourra décider plus tard en connaissance de cause.</td></tr>
+            <tr><td><span class="chip no">Rejetée</span></td><td><span class="chip no">Rejetée</span></td><td>Rien ne change.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Concrètement</span>
+        <h2>Le parcours d'une installation</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Dossier au syndic</h3><p>Devis, emplacement, fiches techniques de l'appareil et du caisson, attestations d'assurance de l'installateur.</p></li>
+        <li><h3>Accusé de réception</h3><p>Aucun travail ne commence avant que le syndic ait confirmé que le dossier est complet.</p></li>
+        <li><h3>Déclaration en mairie</h3><p>Déclaration préalable d'urbanisme, aux frais du copropriétaire, justifiée auprès du syndic.</p></li>
+        <li><h3>Pose par un pro assuré</h3><p>Carottage, fourreau étanche, goulotte, caisson, plots antivibratiles.</p></li>
+        <li><h3>Compte rendu</h3><p>Dans les 30 jours, attestation de conformité et photos datées remises au syndic.</p></li>
+        <li><h3>Entretien annuel</h3><p>Circuit frigorifique contrôlé au moins une fois par an, caisson entretenu.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Garanties</span>
+        <h2>Ce qui protège la copropriété</h2>
+      </div>
+      <div class="guar">
+        <div><h3>Responsabilité</h3><p>Le copropriétaire répond seul de tout dommage lié à son installation, y compris si une garantie de l'immeuble venait à être refusée.</p></div>
+        <div><h3>Remise en état</h3><p>En cas de dépose, la façade est réparée à ses frais et le percement rebouché de façon étanche.</p></div>
+        <div><h3>Registre</h3><p>Le syndic tient la liste des installations, avec photos et comptes rendus, et informe les assureurs.</p></div>
+        <div><h3>Sanctions</h3><p>Une installation non conforme ou sans accord du syndic doit être déposée aux frais de son propriétaire.</p></div>
+        <div><h3>Transmission</h3><p>Les règles suivent le logement : elles sont communiquées à tout acheteur ou locataire.</p></div>
+        <div><h3>Bilan à deux ans</h3><p>L'AG peut ajuster le cahier des charges pour les installations futures.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Questions fréquentes</span>
+        <h2>Vos questions</h2>
+      </div>
+      <div class="faq">
+        <div><h3>Je ne veux pas de climatisation. Qu'est-ce que ça change pour moi ?</h3><p>Rien, sauf si un voisin installe un appareil. Il devra alors respecter les règles d'aspect et de bruit, et vous aurez un recours via le syndic.</p></div>
+        <div><h3>Qui paie ?</h3><p>Celui qui installe paie tout. Seule une éventuelle étude technique prévue par la résolution 1, plafonnée, serait répartie entre tous.</p></div>
+        <div><h3>Est-ce compatible avec le PLU de l'écoquartier ?</h3><p>Le PLU de l'Arsenal admet les climatiseurs s'ils n'altèrent pas l'architecture du bâtiment. Le caisson, la pose au sol et l'interdiction en façade vont dans ce sens. Chaque installation passe aussi par une déclaration en mairie.</p></div>
+        <div><h3>Mon logement n'a ni balcon, ni terrasse, ni jardin.</h3><p>La proposition ne permet pas de fixer un groupe en façade. Elle concerne donc les logements qui ont un espace extérieur privatif.</p></div>
+        <div><h3>Je suis locataire.</h3><p>L'accord de votre propriétaire est nécessaire. C'est lui qui fait la demande au syndic et qui vote en AG.</p></div>
+        <div><h3>Et les climatiseurs mobiles ?</h3><p>Ils refroidissent mal et consomment beaucoup. Un appareil fixe inverter, bien dimensionné, est plus efficace et plus silencieux.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-bottom:0">
+    <div class="wrap">
+      <div class="cta">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span class="eyebrow" style="color:var(--paper);opacity:.8">Assemblée générale [date à confirmer]</span>
+          <h2>Chaque voix compte, même absente</h2>
+          <p>L'autorisation doit réunir la majorité des voix de tous les copropriétaires, présents ou non. Un copropriétaire qui ne vote pas compte comme s'il n'était pas d'accord au premier tour.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <h3 style="color:var(--paper)">Si vous ne pouvez pas venir</h3>
+          <ol>
+            <li>Votez par correspondance avec le formulaire joint à la convocation.</li>
+            <li>Ou donnez un pouvoir à un copropriétaire de votre choix.</li>
+            <li>Ou participez à distance si le syndic le propose.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Page d'information préparée par des copropriétaires de la résidence Symbiose. Seuls font foi le texte des résolutions et le cahier des charges joints à la convocation de l'assemblée générale.</p>
+    <p>Une question ? Contact : [à compléter]</p>
+  </div>
+</footer>
+
+</body>
+</html>
