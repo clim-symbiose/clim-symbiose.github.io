@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
+<meta name="robots" content="noindex, nofollow">
 <title>Climatisation à Symbiose</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -171,6 +172,15 @@ th{font-family:var(--display);font-stretch:90%;font-weight:700;font-size:.85rem;
 .cta ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
 @media (max-width:760px){.cta{grid-template-columns:1fr;padding:24px}}
 
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.person{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow);display:flex;align-items:center;gap:14px}
+.avatar{flex:none;width:44px;height:44px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.05rem}
+.person .who{display:flex;flex-direction:column}
+.person .who strong{font-size:1.02rem}
+.person .who span{font-size:.88rem;color:var(--muted)}
+.support{border:2px dashed var(--accent);border-radius:14px;padding:24px 26px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.support p{color:var(--muted);max-width:60ch}
+@media (max-width:760px){.team{grid-template-columns:1fr}}
 footer{padding:40px 0 56px;border-top:1px solid var(--line);font-size:.88rem;color:var(--muted)}
 footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-left:auto;margin-right:auto}
 </style>
@@ -382,6 +392,27 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
             <li>Ou participez à distance si le syndic le propose.</li>
           </ol>
         </div>
+      </div>
+    </div>
+  </section>
+  <section id="porteurs">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Ils portent le projet</span>
+        <h2>Des voisins de la résidence</h2>
+        <p class="lede">Ce projet est porté par des copropriétaires de plusieurs bâtiments. N'hésitez pas à venir nous en parler.</p>
+      </div>
+      <div class="team">
+        <div class="person"><span class="avatar" aria-hidden="true">B</span><div class="who"><strong>Benoit C.</strong><span>Bâtiment B</span></div></div>
+        <div class="person"><span class="avatar" aria-hidden="true">M</span><div class="who"><strong>Mounir J.</strong><span>Bâtiment C</span></div></div>
+        <div class="person"><span class="avatar" aria-hidden="true">R</span><div class="who"><strong>Romain R.</strong><span>Bâtiment C</span></div></div>
+      </div>
+      <div class="support" hidden>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <h3>Vous soutenez le projet ?</h3>
+          <p>Dites-le-nous en laissant simplement votre prénom et votre bâtiment. Plus nous sommes nombreux, plus la proposition a de poids auprès du conseil syndical et des autres copropriétaires.</p>
+        </div>
+        <!--SOUTIEN_BUTTON-->
       </div>
     </div>
   </section>
