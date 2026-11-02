@@ -94,6 +94,7 @@ figure{margin:0}
 /* Sections */
 section{padding:72px 0}
 main > section + section{border-top:1px solid var(--line)}
+@media (max-width:760px){section{padding:48px 0}.hero{padding:40px 0 48px}}
 .head{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;max-width:68ch}
 
 /* En bref */
@@ -181,6 +182,20 @@ th{font-family:var(--display);font-stretch:90%;font-weight:700;font-size:.85rem;
 .support{border:2px dashed var(--accent);border-radius:14px;padding:24px 26px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
 .support p{color:var(--muted);max-width:60ch}
 @media (max-width:760px){.team{grid-template-columns:1fr}}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+main section, #top{scroll-margin-top:64px}
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);-webkit-backdrop-filter:saturate(1.4) blur(8px);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.nav ul{list-style:none;margin:0 auto;max-width:1080px;padding:10px 24px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+.nav ul::-webkit-scrollbar{display:none}
+.nav li{flex:none;scroll-snap-align:start}
+.nav a{display:block;padding:8px 14px;border-radius:999px;border:1px solid var(--line);color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:600;white-space:nowrap;transition:background .15s,color .15s,border-color .15s}
+.nav a:hover{border-color:var(--accent);color:var(--accent)}
+.nav a.active{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (max-width:760px){
+  .nav ul{padding:10px 16px;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+  .nav a{padding:9px 14px;font-size:.88rem}
+}
 footer{padding:40px 0 56px;border-top:1px solid var(--line);font-size:.88rem;color:var(--muted)}
 footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-left:auto;margin-right:auto}
 </style>
@@ -193,6 +208,20 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
     <span class="tag">Écoquartier de l'Arsenal · Proposition pour la prochaine AG</span>
   </div>
 </header>
+
+<nav class="nav" aria-label="Rubriques">
+  <ul>
+    <li><a href="#essentiel">L'essentiel</a></li>
+    <li><a href="#regles">Règles</a></li>
+    <li><a href="#bruit">Bruit</a></li>
+    <li><a href="#resolutions">Les résolutions</a></li>
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#garanties">Garanties</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#vote">Voter</a></li>
+    <li><a href="#porteurs">Soutenir</a></li>
+  </ul>
+</nav>
 
 <div class="hero">
   <div class="wrap">
@@ -213,7 +242,7 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
 </div>
 
 <main>
-  <section>
+  <section id="essentiel">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">En bref</span>
@@ -268,7 +297,7 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
     </div>
   </section>
 
-  <section>
+  <section id="bruit">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">Le bruit</span>
@@ -289,7 +318,7 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
     </div>
   </section>
 
-  <section>
+  <section id="resolutions">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">À l'AG</span>
@@ -323,7 +352,7 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
     </div>
   </section>
 
-  <section>
+  <section id="parcours">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">Concrètement</span>
@@ -340,7 +369,7 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
     </div>
   </section>
 
-  <section>
+  <section id="garanties">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">Garanties</span>
@@ -357,7 +386,7 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
     </div>
   </section>
 
-  <section>
+  <section id="faq">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">Questions fréquentes</span>
@@ -425,5 +454,26 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
   </div>
 </footer>
 
+<script>
+(function(){
+  var nav=document.querySelector('.nav ul'); if(!nav||!('IntersectionObserver' in window)) return;
+  var links={}; nav.querySelectorAll('a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
+  var current=null;
+  function setActive(id){
+    if(id===current) return; current=id;
+    Object.keys(links).forEach(function(k){links[k].classList.toggle('active',k===id); if(k===id){links[k].setAttribute('aria-current','true');}else{links[k].removeAttribute('aria-current');}});
+    var a=links[id]; if(!a) return;
+    var left=a.offsetLeft-(nav.clientWidth-a.offsetWidth)/2;
+    nav.scrollTo({left:Math.max(0,left),behavior:'smooth'});
+  }
+  var visible={};
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){visible[e.target.id]=e.isIntersecting;});
+    var ids=Object.keys(links).filter(function(id){return visible[id];});
+    if(ids.length) setActive(ids[0]); else if(window.scrollY<200) setActive(null);
+  },{rootMargin:'-70px 0px -55% 0px'});
+  Object.keys(links).forEach(function(id){var el=document.getElementById(id); if(el) io.observe(el);});
+})();
+</script>
 </body>
 </html>
