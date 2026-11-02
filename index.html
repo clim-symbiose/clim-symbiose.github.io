@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
 <title>Climatisation à Symbiose</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,16 +30,7 @@
   --body:"Public Sans", "Segoe UI", Helvetica, Arial, sans-serif;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#111214; --sheet:#111214; --tint:#111214; --ink:#f2f2f0; --muted:#a4a7ae; --line:#2c2e33;
-    --accent:#d6af72; --accent-soft:#2f2a22; --warm:#e08a62; --band:#26282c; --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.3); color-scheme: dark;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#111214; --sheet:#111214; --tint:#111214; --ink:#f2f2f0; --muted:#a4a7ae; --line:#2c2e33;
-  --accent:#d6af72; --accent-soft:#2f2a22; --warm:#e08a62; --band:#26282c; --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.3); color-scheme: dark;
-}
+html, body{background:#ffffff;color-scheme:light}
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
