@@ -162,8 +162,10 @@ th{font-family:var(--display);font-stretch:90%;font-weight:700;font-size:.85rem;
 
 /* FAQ */
 .faq{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px}
-.faq div{display:flex;flex-direction:column;gap:6px}
+.faq > div{display:flex;flex-direction:column;gap:8px}
 .faq p{color:var(--muted);font-size:.97rem}
+.faq ul,.faq ol{margin:0;padding-left:20px;color:var(--muted);font-size:.97rem;display:flex;flex-direction:column;gap:4px}
+.faq li strong{color:var(--ink)}
 @media (max-width:760px){.faq{grid-template-columns:1fr}}
 
 /* Vote AG */
@@ -394,6 +396,8 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
       </div>
       <div class="faq">
         <div><h3>Je ne veux pas de climatisation. Qu'est-ce que ça change pour moi ?</h3><p>Rien, sauf si un voisin installe un appareil. Il devra alors respecter les règles d'aspect et de bruit, et vous aurez un recours via le syndic.</p></div>
+        <div><h3>Et si la clim de mon voisin m'empêche de dormir ?</h3><p>C'est justement ce que les règles proposées cherchent à éviter :</p><ul><li><strong>Un mode nuit obligatoire de 22 h à 7 h</strong>, qui réduit le bruit de l'appareil.</li><li><strong>50 dB(A) maximum à 1 mètre</strong>, l'équivalent d'une conversation calme. Le bruit perçu chez vous est plus faible, car il diminue avec la distance.</li><li><strong>Des plots antivibratiles et un caisson</strong> autour de l'appareil, posé à au moins 1 mètre de votre fenêtre.</li></ul><p>Si vous êtes quand même gêné :</p><ol><li><strong>Parlez-en d'abord à votre voisin.</strong> Souvent, un réglage, l'activation du mode nuit ou un entretien suffit.</li><li><strong>Si rien ne change, prévenez le syndic.</strong> Il peut faire mesurer le bruit par un professionnel. Si les limites sont dépassées, votre voisin doit corriger la situation à ses frais.</li><li><strong>Sans correction</strong>, le syndic le met en demeure. En dernier recours, l'installation doit être retirée.</li></ol></div>
+        <div><h3>La clim, ce n'est pas mauvais pour la planète ?</h3><p>La question est légitime. Une clim consomme de l'électricité et contient un fluide qui ne doit pas s'échapper. La proposition en tient compte :</p><ul><li><strong>Des appareils efficaces.</strong> Les modèles inverter exigés consomment nettement moins que les climatiseurs mobiles, qui se multiplient faute de mieux.</li><li><strong>Un fluide sous contrôle.</strong> Seul un professionnel certifié peut le manipuler, et l'appareil est contrôlé au moins une fois par an.</li><li><strong>Une électricité peu carbonée.</strong> En France, l'électricité est l'une des moins carbonées d'Europe.</li><li><strong>Un atout l'hiver.</strong> En mode chauffage, une clim réversible consomme deux à trois fois moins qu'un radiateur électrique.</li></ul><p>Les bons gestes restent la base : volets fermés le jour, aération la nuit, consigne autour de 26 °C. Mais pendant les canicules, certains logements deviennent invivables, surtout pour les jeunes enfants, les personnes âgées et ceux qui travaillent chez eux. La clim prend alors le relais.</p></div>
         <div><h3>Qui paie ?</h3><p>Celui qui installe paie tout. Seule une éventuelle étude technique prévue par la résolution 1, plafonnée, serait répartie entre tous.</p></div>
         <div><h3>Est-ce compatible avec le PLU de l'écoquartier ?</h3><p>Le PLU de l'Arsenal admet les climatiseurs s'ils n'altèrent pas l'architecture du bâtiment. Le caisson, la pose au sol et l'interdiction en façade vont dans ce sens. Chaque installation passe aussi par une déclaration en mairie.</p></div>
         <div><h3>Mon logement n'a ni balcon, ni terrasse, ni jardin.</h3><p>La proposition ne permet pas de fixer un groupe en façade. Elle concerne donc les logements qui ont un espace extérieur privatif.</p></div>
