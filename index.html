@@ -175,9 +175,9 @@ th{font-family:var(--display);font-stretch:90%;font-weight:700;font-size:.85rem;
 .cta ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
 @media (max-width:760px){.cta{grid-template-columns:1fr;padding:24px}}
 
-.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:28px}
-.person{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow);display:flex;align-items:center;gap:14px}
-.avatar{flex:none;width:44px;height:44px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.05rem}
+.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px}
+.person{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px}
+.avatar{flex:none;width:38px;height:38px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.05rem}
 .person .who{display:flex;flex-direction:column}
 .person .who strong{font-size:1.02rem}
 .person .who span{font-size:.88rem;color:var(--muted)}
@@ -430,9 +430,9 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
   <section id="porteurs">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Ils portent le projet</span>
-        <h2>Des voisins de la résidence</h2>
-        <p class="lede">Ce projet est porté par des copropriétaires de plusieurs bâtiments. N'hésitez pas à venir nous en parler.</p>
+        <span class="eyebrow">Ils soutiennent le projet</span>
+        <h2>Déjà <span id="nb-soutiens">7</span> voisins soutiennent le projet</h2>
+        <p class="lede">Des copropriétaires de plusieurs bâtiments soutiennent cette proposition. Rejoignez-les !</p>
       </div>
       <div class="team">
         <div class="person"><span class="avatar" aria-hidden="true">B</span><div class="who"><strong>Benoit C.</strong><span>Bâtiment B</span></div></div>
@@ -446,7 +446,7 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
       <div class="support">
         <div style="display:flex;flex-direction:column;gap:6px">
           <h3>Vous soutenez le projet ?</h3>
-          <p>Dites-le-nous en laissant simplement votre prénom et votre bâtiment. Plus nous sommes nombreux, plus la proposition a de poids auprès du conseil syndical et des autres copropriétaires.</p>
+          <p>Laissez votre prénom et votre bâtiment : avec votre accord, nous ajouterons votre nom à cette liste. Plus nous sommes nombreux, plus la proposition a de poids auprès du conseil syndical et des autres copropriétaires.</p>
         </div>
         <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLScvx8tQ1oYOK_YtWfXeAToo8x1i4-lZtrK7F7fDlGrPd80pjA/viewform" target="_blank" rel="noopener">Je soutiens le projet</a>
       </div>
@@ -457,7 +457,7 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
 <footer>
   <div class="wrap">
     <p>Page d'information préparée par des copropriétaires de la résidence Symbiose. Seuls font foi le texte des résolutions et le cahier des charges joints à la convocation de l'assemblée générale.</p>
-    <p>Une question ? Parlez-en à l'un des <a href="#porteurs">porteurs du projet</a>, ou laissez un commentaire dans le <a href="https://docs.google.com/forms/d/e/1FAIpQLScvx8tQ1oYOK_YtWfXeAToo8x1i4-lZtrK7F7fDlGrPd80pjA/viewform" target="_blank" rel="noopener">formulaire de soutien</a>.</p>
+    <p>Une question ? Parlez-en à l'un des <a href="#porteurs">voisins qui soutiennent le projet</a>, ou laissez un commentaire dans le <a href="https://docs.google.com/forms/d/e/1FAIpQLScvx8tQ1oYOK_YtWfXeAToo8x1i4-lZtrK7F7fDlGrPd80pjA/viewform" target="_blank" rel="noopener">formulaire de soutien</a>.</p>
   </div>
 </footer>
 
@@ -481,6 +481,9 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
   },{rootMargin:'-70px 0px -55% 0px'});
   Object.keys(links).forEach(function(id){var el=document.getElementById(id); if(el) io.observe(el);});
 })();
+</script>
+<script>
+(function(){var n=document.querySelectorAll('#porteurs .person').length;var el=document.getElementById('nb-soutiens');if(el&&n)el.textContent=n;})();
 </script>
 </body>
 </html>
