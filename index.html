@@ -175,7 +175,7 @@ th{font-family:var(--display);font-stretch:90%;font-weight:700;font-size:.85rem;
 .cta ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
 @media (max-width:760px){.cta{grid-template-columns:1fr;padding:24px}}
 
-.team{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:28px}
 .person{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow);display:flex;align-items:center;gap:14px}
 .avatar{flex:none;width:44px;height:44px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.05rem}
 .person .who{display:flex;flex-direction:column}
@@ -438,6 +438,8 @@ footer .wrap{display:flex;flex-direction:column;gap:8px;max-width:760px;margin-l
         <div class="person"><span class="avatar" aria-hidden="true">B</span><div class="who"><strong>Benoit C.</strong><span>Bâtiment B</span></div></div>
         <div class="person"><span class="avatar" aria-hidden="true">M</span><div class="who"><strong>Mounir J.</strong><span>Bâtiment C</span></div></div>
         <div class="person"><span class="avatar" aria-hidden="true">R</span><div class="who"><strong>Romain R.</strong><span>Bâtiment D</span></div></div>
+        <div class="person"><span class="avatar" aria-hidden="true">S</span><div class="who"><strong>Sandrine D.</strong><span>Bâtiment C</span></div></div>
+        <div class="person"><span class="avatar" aria-hidden="true">R</span><div class="who"><strong>Renaud F.</strong><span>Bâtiment C</span></div></div>
       </div>
       <div class="support">
         <div style="display:flex;flex-direction:column;gap:6px">
